@@ -3,9 +3,13 @@ package com.rent_db.dto;
 import com.rent_db.enums.Availability;
 import jakarta.validation.constraints.NotNull;
 
+
 public record CarDto(
+
     @NotNull(message = "This field is mandatory")
     String model,
+
+    int id,
 
     @NotNull(message = "this field cannot be null")
     Availability availability,
@@ -14,7 +18,18 @@ public record CarDto(
      int price,
 
     @NotNull
-     int no_of_seats
+     int no_of_seats,
+
+     @NotNull
+     int pick_up_mileage,
+
+    @NotNull
+    int admin_id,
+
+    @NotNull
+    int agent_id,
+
+    String idPath
 
     ){
 

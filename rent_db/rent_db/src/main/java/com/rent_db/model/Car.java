@@ -4,6 +4,7 @@ import com.rent_db.enums.Availability;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.aspectj.weaver.loadtime.Agent;
 
 import java.time.LocalDate;
 
@@ -27,6 +28,18 @@ public class Car {
     @Column(nullable=false)
     private int no_of_seats;
 
+    @Column(nullable=false)
+    private int pick_up_mileage;
+
+    @ManyToOne
+    private Admin admin;
+
+    @ManyToOne
+    private RentalAgent agent;
+
+    private boolean isActive = true;
+
+    private String idPath;
 
 
 }

@@ -1,6 +1,8 @@
 package com.rent_db.config;
 
+import com.rent_db.exception.FileInvalidExtensionException;
 import com.rent_db.exception.ResourceNotFoundException;
+import com.rent_db.exception.UserAlreadyPresentException;
 import com.rent_db.util.ResponseUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +39,49 @@ public class GlobalExceptionHandler {
 
         }
         return ResponseEntity.badRequest().body(map);
+    }
+    // FileNotFoundException
+    @ExceptionHandler(FileNotFoundException.class)
+    public ResponseEntity<ResponseUtility> handleFileNotFoundException(
+            FileNotFoundException e
+    ){
+        responseUtility.setMessage(e.getMessage());
+        return ResponseEntity
+                .badRequest()
+                .body(responseUtility);
+    }
+
+    // IOException
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ResponseUtility> handleIOException(
+            IOException e
+    ){
+        responseUtility.setMessage(e.getMessage());
+        return ResponseEntity
+                .badRequest()
+                .body(responseUtility);
+    }
+
+    //FileInvalidExtensionException
+    @ExceptionHandler(FileInvalidExtensionException.class)
+    public ResponseEntity<ResponseUtility> handleFileInvalidExtensionException(
+            FileInvalidExtensionException e
+    ){
+        responseUtility.setMessage(e.getMessage());
+        return ResponseEntity
+                .badRequest()
+                .body(responseUtility);
+    }
+
+    //UserAlreadyPresentException
+    @ExceptionHandler(UserAlreadyPresentException.class)
+    public ResponseEntity<ResponseUtility> handleUserAlreadyPresentException(
+            UserAlreadyPresentException e
+    ){
+        responseUtility.setMessage(e.getMessage());
+        return ResponseEntity
+                .badRequest()
+                .body(responseUtility);
     }
 
 }
